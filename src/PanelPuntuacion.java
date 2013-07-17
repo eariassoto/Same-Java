@@ -1,20 +1,29 @@
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel; 
+import javax.swing.JTextArea;
 
 @SuppressWarnings("all")
 public class PanelPuntuacion extends JPanel{
 	
 	JLabel lbl,lblMarcador,lblMensaje;
+	int p[];
+	String mensaje, n[];
+	JTextArea txtPuntuacion;
 	Marcador marcador;
+	Puntuacion puntuacion;
+	GuardarPuntuacion guardarPuntuacion;
+	
 	final String SAME = "SAME", PUNTOS = "Puntos: ", WIN = "¡Felicidades, ganaste!", LOSE = "¡Fin del juego, perdiste!", NEW = "Nuevo Juego";
 	
-		public PanelPuntuacion(){
+		public PanelPuntuacion(Puntuacion puntuacion,GuardarPuntuacion guardarPuntuacion){
 			this.setBackground(Color.WHITE);
 			this.setLayout(null);
-			
+			this.puntuacion = puntuacion;
+			this.guardarPuntuacion = guardarPuntuacion;
 			marcador = new Marcador();
 			
 			lbl = new JLabel(SAME);
@@ -42,7 +51,17 @@ public class PanelPuntuacion extends JPanel{
 			lblMensaje.setVisible(false);
 			add(lblMensaje);
 			
+			txtPuntuacion = new JTextArea();
+			txtPuntuacion.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,15));
+			txtPuntuacion.setEditable(false);
+			txtPuntuacion.setSize(150, 150);
+			txtPuntuacion.setBackground(Color.LIGHT_GRAY);
+			txtPuntuacion.setBounds(5, 200, 185, 125);
+			txtPuntuacion.setVisible(true);
+			add(txtPuntuacion);
+			
 			resetMarcador();
+			setPuntuacion();
 		}
 		
 		public void setMarcador(int p){
@@ -76,8 +95,29 @@ public class PanelPuntuacion extends JPanel{
 				lblMensaje.setVisible(true);
 				btn.setVisible(true);
 				break;
+			}	
+		}
+		
+		public void setPuntuacion(){
+			p = puntuacion.getPuntuacion();
+			n = puntuacion.getNombres();
+			mensaje = "Mejores Puntuaciones:\n";
+			for(int i = 0; i<5;i++){
+				if(p[i]!=0){
+					mensaje += String.valueOf(i+1) + "- "+n[i]+" "+p[i]+"\n";
+				}
+				else{
+					mensaje += String.valueOf(i+1) + "-\n";
+				}
 			}
-				
+			txtPuntuacion.setText(mensaje);
+		}
+		
+		public void comprobar(){
+			if(puntuacion.comprobar(marcador.getMarcador())){
+				guardarPuntuacion.guardar(puntuacion);
+				setPuntuacion();
+			}
 		}
 		
 		class Marcador{

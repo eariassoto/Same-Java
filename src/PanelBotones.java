@@ -100,10 +100,15 @@ public class PanelBotones extends JPanel{
 				
 				if(juegoGanado){
 					panelPuntuacion.mostrarMensaje(btnReiniciar, 1);
+					panelPuntuacion.setMarcador(1000);
+					panelPuntuacion.comprobar();
 				}
 				else if(juegoTeminado){
 					panelPuntuacion.mostrarMensaje(btnReiniciar, 0);
+					panelPuntuacion.comprobar();
 				}
+
+
 				
 				
 				semaforo.release();
@@ -153,9 +158,12 @@ public class PanelBotones extends JPanel{
 				
 				if(juegoGanado){
 					panelPuntuacion.mostrarMensaje(btnReiniciar, 1);
+					panelPuntuacion.setMarcador(1000);
+					panelPuntuacion.comprobar();
 				}
 				else if(juegoTeminado){
 					panelPuntuacion.mostrarMensaje(btnReiniciar, 0);
+					panelPuntuacion.comprobar();
 				}
 
 				semaforo.release();
