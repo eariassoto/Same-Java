@@ -1,3 +1,6 @@
+/*
+ * @author Emmanuel Arias Soto emmanuel1412@gmail.com
+ */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
@@ -7,9 +10,20 @@ import javax.swing.Spring;
 import javax.swing.SpringLayout;
 import java.util.Iterator;
 
+// TODO: Auto-generated Javadoc
+/**
+ * La clase Interfaz crea una ventana con los paneles que contienen las
+ * representaciones del tablero y el panel del puntaje.
+ */
 @SuppressWarnings("all")
 public class Interfaz extends JFrame{
 	
+	/**
+	 * Instancia una nueva interfaz.
+	 *
+	 * @param panelBotones el panel de botones
+	 * @param panelPuntuacion the panel de puntuacion
+	 */
 	public Interfaz(PanelBotones panelBotones,PanelPuntuacion panelPuntuacion){
 		super("SAME");
 

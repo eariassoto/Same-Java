@@ -1,6 +1,19 @@
+/*
+ * @author Emmanuel Arias Soto emmanuel1412@gmail.com
+ */
 import java.util.concurrent.Semaphore;
 
+// TODO: Auto-generated Javadoc
+/**
+ * La clase Main.
+ */
 public class Main{
+	
+	/**
+	 * El método main.
+	 *
+	 * @param args los argumentos
+	 */
 	public static void main(String args[]){
 		
 		final int F = 18, C = 15;
@@ -14,7 +27,7 @@ public class Main{
 		
 		PanelPuntuacion panelPuntuacion = new PanelPuntuacion(puntuacion,guardarPuntuacion);
 		PanelBotones panelBotones = new PanelBotones(F,C,semaforo,panelPuntuacion);
-		Tablero tablero = new Tablero(F, C,F-1,C-1);
+		Tablero tablero = new Tablero(F,C);
 		Interfaz interfaz = new Interfaz(panelBotones,panelPuntuacion);
 		Interaccion interaccion = new Interaccion(F, C, tablero, interfaz, semaforo,panelBotones,panelPuntuacion);
 

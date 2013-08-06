@@ -1,33 +1,55 @@
+/*
+ * @author Emmanuel Arias Soto emmanuel1412@gmail.com
+ */
 import java.io.Serializable;
 
 import javax.swing.JOptionPane;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * La clase Puntuacion que es utilizada para serializar en un archivo, esta
+ * contiene las mejores puntuaciones.
+ */
 public class Puntuacion implements Serializable{
 
+	/** La constante serialVersionUID. */
 	public static final long serialVersionUID = -2940309403028151430L;
-	int puntuacion[];
+	
+	/** La matriz que contiene las puntuaciones */
+	int puntuaciones[];
+	
+	/** La matriz que contiene los nombres. */
 	String nombres[];
 	
+	/**
+	 * Instancia un nuevo puntuacion.
+	 */
 	public Puntuacion(){
-		puntuacion = new int[5];
+		puntuaciones = new int[5];
 		nombres = new String[5];
 		for(int i=0; i<5 ;i++){
-			puntuacion[i] = 0;
+			puntuaciones[i] = 0;
 			nombres[i] = "";
 		}
 	}
 	
-	public boolean comprobar(int x){
+	/**
+	 * Comprobar si la puntuacion está entre las mejores.
+	 *
+	 * @param p la puntuacion
+	 * @return true, si se cumple
+	 */
+	public boolean comprobar(int p){
 		int c = 4;
 		int pos = -1;
-		while(c>-1 && x>puntuacion[c]){
+		while(c>-1 && p>puntuaciones[c]){
 			pos = c;
 			c--;
 		}
 		if(pos!=-1){
-			agregarPuntuacion(x,pos);
+			agregarPuntuacion(p,pos);
 			return true;		
 		}
 		else{
@@ -36,13 +58,19 @@ public class Puntuacion implements Serializable{
 
 	}
 
-	void agregarPuntuacion(int x,int pos){
+	/**
+	 * Agregar puntuacion.
+	 *
+	 * @param p la puntuacion
+	 * @param pos the pos
+	 */
+	void agregarPuntuacion(int p,int pos){
 
 		for(int i= 3; i>=pos; i--){
-			puntuacion[i+1]=puntuacion[i];
+			puntuaciones[i+1]=puntuaciones[i];
 			nombres[i+1] = nombres[i];
 		}
-		puntuacion[pos] = x;
+		puntuaciones[pos] = p;
 		String s = null;
 		do{
 			s = JOptionPane.showInputDialog(null, "Nueva alta puntuación ingresa tu nombre: (máx. 15 carac)", "SAME", 1);
@@ -52,11 +80,21 @@ public class Puntuacion implements Serializable{
 		nombres[pos] = s;
 	}
 
+	/**
+	 * Devuelve las puntuaciones.
+	 *
+	 * @return la matriz con las puntuaciones
+	 */
 	public int[] getPuntuacion(){
-		return puntuacion;
+		return puntuaciones;
 	}
+	
+	/**
+	 * Devuelve los nombres.
+	 *
+	 * @return la matriz con los nombres
+	 */
 	public String[] getNombres(){
 		return nombres;
 	}
-	
 }

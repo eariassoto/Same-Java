@@ -1,3 +1,6 @@
+/*
+ * @author Emmanuel Arias Soto emmanuel1412@gmail.com
+ */
 import java.awt.Color;
 import java.awt.Font;
 
@@ -6,19 +9,46 @@ import javax.swing.JLabel;
 import javax.swing.JPanel; 
 import javax.swing.JTextArea;
 
+// TODO: Auto-generated Javadoc
+/**
+ * La clase PanelPuntuacion que contienen las atiquetas que muestran
+ * al usuario su puntuación actual y las mejores puntuaciones, además
+ * del botón para iniciar un nuevo juego.
+ */
 @SuppressWarnings("all")
 public class PanelPuntuacion extends JPanel{
 	
+	/** Los label que van a mostrar la información. */
 	JLabel lbl,lblMarcador,lblMensaje;
+	
+	/** La matriz que se usa para almacenar las mejores puntuaciones. */
 	int p[];
+	
+	/** Un string para mostrar mensajes y una matriz con los nombres de 
+	 * las mejores puntuaciones. */
 	String mensaje, n[];
+	
+	/** Area de texto para mostrar la tabla de puntuaciones. */
 	JTextArea txtPuntuacion;
+	
+	/** La clase interna marcador. */
 	Marcador marcador;
+	
+	/** El objeto puntuacion. */
 	Puntuacion puntuacion;
+	
+	/** guardarPuntuacion. */
 	GuardarPuntuacion guardarPuntuacion;
 	
+	/** Mensajes necesarios. */
 	final String SAME = "SAME", PUNTOS = "Puntos: ", WIN = "¡Felicidades, ganaste!", LOSE = "¡Fin del juego, perdiste!", NEW = "Nuevo Juego";
 	
+		/**
+		 * Instancia un nuevo panelPuntuacion.
+		 *
+		 * @param puntuacion el objeto puntuacion
+		 * @param guardarPuntuacion el objeto guardarPuntuacion
+		 */
 		public PanelPuntuacion(Puntuacion puntuacion,GuardarPuntuacion guardarPuntuacion){
 			this.setBackground(Color.WHITE);
 			this.setLayout(null);
@@ -64,11 +94,19 @@ public class PanelPuntuacion extends JPanel{
 			setPuntuacion();
 		}
 		
+		/**
+		 * Establece el marcador.
+		 *
+		 * @param p the new marcador
+		 */
 		public void setMarcador(int p){
 			marcador.setMarcador(p);
 			lblMarcador.setText(String.valueOf(marcador.getMarcador()));
 		}
 		
+		/**
+		 * Resetea el marcador.
+		 */
 		public void resetMarcador(){
 			marcador.resetMarcador();
 			lblMarcador.setText(String.valueOf(marcador.getMarcador()));
@@ -76,13 +114,24 @@ public class PanelPuntuacion extends JPanel{
 			lblMensaje.setVisible(false);
 		}
 		
+		/**
+		 * Agrega el boton al panel.
+		 *
+		 * @param btn el botón
+		 */
 		public void agregarBtn(JButton btn){
 			btn.setBounds(85, 155, 110, 25);
 			btn.setText(NEW);
 			btn.setVisible(false);
-			add(btn);
+			this.add(btn);
 		}
 		
+		/**
+		 * Mostrar mensaje.
+		 *
+		 * @param btn el botón
+		 * @param a la opción del mensaje
+		 */
 		public void mostrarMensaje(JButton btn, int a){
 			switch(a){
 			case 0:
@@ -98,6 +147,9 @@ public class PanelPuntuacion extends JPanel{
 			}	
 		}
 		
+		/**
+		 * Escribe las puntuaciones en el area de texto.
+		 */
 		public void setPuntuacion(){
 			p = puntuacion.getPuntuacion();
 			n = puntuacion.getNombres();
@@ -113,6 +165,9 @@ public class PanelPuntuacion extends JPanel{
 			txtPuntuacion.setText(mensaje);
 		}
 		
+		/**
+		 * Comprobar si la puntuación está entre las mejores.
+		 */
 		public void comprobar(){
 			if(puntuacion.comprobar(marcador.getMarcador())){
 				guardarPuntuacion.guardar(puntuacion);
@@ -120,18 +175,39 @@ public class PanelPuntuacion extends JPanel{
 			}
 		}
 		
+		/**
+		 * La clase interna Marcador que sirve para manejar
+		 * la puntuacion actual del usuario.
+		 */
 		class Marcador{
+
+			/** El marcador. */
 			int marcador;
+
+			/**
+			 * Resetear marcador.
+			 */
 			void resetMarcador(){
 				marcador = 0;
 			}
+
+			/**
+			 * Establece el marcador.
+			 *
+			 * @param x el nuevo marcador
+			 */
 			void setMarcador(int x){
 				marcador += x;
 			}
+
+			/**
+			 * Devuelve el marcador.
+			 *
+			 * @return el marcador
+			 */
 			int getMarcador(){
 				return marcador;
 			}
 		}
-	
 }
 
